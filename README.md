@@ -1,54 +1,65 @@
-# React + TypeScript + Vite
+# Card Challenge - React Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta es una aplicación en React que permite agregar frases, visualizarlas en formato de tarjetas (cards), filtrarlas por texto en tiempo real y eliminarlas. Fue desarrollada como parte de un challenge técnico para evaluar conocimientos de React avanzado.
 
-Currently, two official plugins are available:
+Consigna:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Realizar una aplicación en React que permita agregar frases y que esas frases las vaya poniendo
+en cards en una matriz. Tiene que permitir buscar dentro de las frases un contenido y que filtre las
+cards que contengan ese texto al comenzar a digitar las letras del mismo. También poder eliminar
+frases.
 
-## Expanding the ESLint configuration
+Recuerda que el objetivo objetivo del challenge es entender tu nivel de conocimiento actual, por lo
+tanto, todo lo que agregues lo tendremos en cuenta y estaremos evaluando:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Conocimientos de REACT avanzado, incluyendo Hooks, HOC, render props, manejo de Context.
+Manejo de estados: redux o context o cualquier otra biblioteca para la gestion de estado.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+JS
+Conocimientos de ES6+, clousures, hoisting, manejo de promesas aync await, gestion de errores,
+typescript, test, (Jest React Testing Library)
+
+Optimizaciones del rendimiento de la aplicación.
+
+Ejecuta el siguiente comando para iniciar la aplicación:
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Funcionalidades
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+- ✅ Agregar frases mediante un formulario controlado
+- ✅ Renderizado de frases en una grilla tipo "card"
+- ✅ Búsqueda en vivo (filtrado en tiempo real)
+- ✅ Eliminación de frases individuales
+- ✅ Interfaz responsiva y estilizada con `styled-components`
+
+---
+
+## Tecnologías utilizadas
+
+- [React 19](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Styled Components](https://styled-components.com/)
+- [Vitest](https://vitest.dev/) + [React Testing Library](https://testing-library.com/) para testing
+- [Vite](https://vitejs.dev/) para bundling
+
+---
+
+## Tests incluidos
+
+Se incluyen pruebas unitarias con cobertura completa de:
+
+- `PhraseForm` (formulario de ingreso)
+- `PhraseList` (lista con filtrado y eliminación)
+- `SearchInput` (input controlado)
+
+Ejecutá los tests con:
+
+```bash
+npx vitest run
 ```
