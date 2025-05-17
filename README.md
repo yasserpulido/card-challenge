@@ -32,11 +32,13 @@ npm run dev
 
 ## Funcionalidades
 
-- ✅ Agregar frases mediante un formulario controlado
-- ✅ Renderizado de frases en una grilla tipo "card"
-- ✅ Búsqueda en vivo (filtrado en tiempo real)
-- ✅ Eliminación de frases individuales
-- ✅ Interfaz responsiva y estilizada con `styled-components`
+- ✅ Lógica desacoplada con `Context + useReducer`
+- ✅ Persistencia local automática usando `localStorage` con función de inicialización
+- ✅ Uso de `React.memo`, `useMemo`, `useCallback` para mejorar performance
+- ✅ Composición avanzada con HOC (`withFilter`) que separa lógica de presentación
+- ✅ Tests unitarios para todos los componentes y lógica (incluido el HOC)
+- ✅ Validaciones simples para evitar inputs vacíos
+- ✅ Diseño limpio y responsive con `styled-components`
 
 ---
 
