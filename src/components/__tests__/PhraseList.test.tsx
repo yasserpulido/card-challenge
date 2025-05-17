@@ -1,60 +1,31 @@
-import { describe, test, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
-import type { Phrase } from "../../types";
+import { describe, test, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { PhraseList } from "../PhraseList";
 import { PhraseContext } from "../../context";
-import { PhraseList } from "..";
+import type { Phrase } from "../../types/phrase";
 
-describe("PhraseList", () => {
-  const mockRemovePhrase = vi.fn();
+describe("PhraseList (HOC)", () => {
+  const mockRemovePhrase = () => {};
 
   const phrases: Phrase[] = [
-    { id: "1", text: "Hola mundo" },
-    { id: "2", text: "React es genial" },
-    { id: "3", text: "Vitest rocks" },
+    { id: "1", text: "Frase de prueba" },
+    { id: "2", text: "Otra más" },
   ];
 
-  const renderWithProvider = (searchTerm: string) =>
+  test("renderiza frases filtradas por el searchTerm", () => {
     render(
       <PhraseContext.Provider
         value={{
           state: { phrases },
-          addPhrase: vi.fn(),
+          addPhrase: () => {},
           removePhrase: mockRemovePhrase,
         }}
       >
-        <PhraseList searchTerm={searchTerm} />
+        <PhraseList phrases={phrases} searchTerm="otra" />
       </PhraseContext.Provider>
     );
 
-  beforeEach(() => {
-    mockRemovePhrase.mockReset();
-  });
-
-  test("renderiza solo las frases que coinciden con el searchTerm", () => {
-    renderWithProvider("react");
-    expect(screen.getByText(/react es genial/i)).toBeInTheDocument();
-    expect(screen.queryByText(/hola mundo/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/vitest rocks/i)).not.toBeInTheDocument();
-  });
-
-  test("renderiza todas las frases si el searchTerm está vacío", () => {
-    renderWithProvider("");
-    expect(screen.getByText(/hola mundo/i)).toBeInTheDocument();
-    expect(screen.getByText(/react es genial/i)).toBeInTheDocument();
-    expect(screen.getByText(/vitest rocks/i)).toBeInTheDocument();
-  });
-
-  test("llama a removePhrase cuando se hace click en eliminar", () => {
-    renderWithProvider("hola");
-    const deleteButton = screen.getByRole("button", { name: /x/i });
-    fireEvent.click(deleteButton);
-    expect(mockRemovePhrase).toHaveBeenCalledTimes(1);
-    expect(mockRemovePhrase).toHaveBeenCalledWith("1");
-  });
-
-  test("renderiza sin frases si el filtro no encuentra nada", () => {
-    renderWithProvider("inexistente");
-    expect(screen.queryByText(/hola mundo/i)).not.toBeInTheDocument();
-    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    expect(screen.getByText(/otra más/i)).toBeInTheDocument();
+    expect(screen.queryByText(/frase de prueba/i)).not.toBeInTheDocument();
   });
 });

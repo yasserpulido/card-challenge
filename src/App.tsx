@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { PhraseForm, PhraseList, SearchInput } from "./components";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import { usePhraseContext } from "./hooks";
 
 const AppContainer = styled.div`
   display: flex;
@@ -32,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
+  const { state } = usePhraseContext();
 
   const handleSearchChange = useCallback((value: string) => {
     setSearchTerm(value);
@@ -44,7 +46,7 @@ function App() {
         <h1>Frases</h1>
         <PhraseForm />
         <SearchInput value={searchTerm} onChange={handleSearchChange} />
-        <PhraseList searchTerm={searchTerm} />
+        <PhraseList phrases={state.phrases} searchTerm={searchTerm} />
       </CardBox>
     </AppContainer>
   );
