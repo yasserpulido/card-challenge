@@ -65,3 +65,7 @@ Ejecutá los tests con:
 ```bash
 npx vitest run
 ```
+
+## 🚀 Deploy
+
+Aplicación desplegada: [https://card-challenge-jade.vercel.app](https://card-challenge-jade.vercel.app)
