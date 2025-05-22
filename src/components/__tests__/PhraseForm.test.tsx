@@ -34,21 +34,6 @@ describe("PhraseForm", () => {
     ).toBeInTheDocument();
   });
 
-  test("el botón está deshabilitado si el input está vacío", () => {
-    renderWithProvider();
-    const button = screen.getByRole("button", { name: /agregar/i });
-    expect(button).toBeDisabled();
-  });
-
-  test("el botón se habilita cuando hay texto", () => {
-    renderWithProvider();
-    const input = screen.getByPlaceholderText(/escribe una frase/i);
-    const button = screen.getByRole("button", { name: /agregar/i });
-
-    fireEvent.change(input, { target: { value: "Hola mundo" } });
-    expect(button).not.toBeDisabled();
-  });
-
   test("al hacer submit llama a addPhrase y limpia el input", () => {
     renderWithProvider();
     const input = screen.getByPlaceholderText(/escribe una frase/i);
@@ -71,5 +56,19 @@ describe("PhraseForm", () => {
     fireEvent.click(button);
 
     expect(mockAddPhrase).not.toHaveBeenCalled();
+  });
+
+  test("muestra mensaje de error si se intenta agregar una frase vacía", () => {
+    renderWithProvider();
+
+    const input = screen.getByPlaceholderText(/escribe una frase/i);
+    const form = screen.getByRole("form", { name: /formulario/i });
+
+    fireEvent.change(input, { target: { value: "   " } });
+    fireEvent.submit(form);
+
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      /no se puede agregar una frase vacía/i
+    );
   });
 });

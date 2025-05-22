@@ -17,6 +17,7 @@ export const SearchInputComponent = ({ value, onChange }: Props) => {
     <Input
       type="text"
       placeholder="Buscar..."
+      aria-label="Buscar frases"
       value={value}
       onChange={(e) => onChange(e.target.value)}
     />

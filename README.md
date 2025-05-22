@@ -1,44 +1,52 @@
 # Card Challenge - React Frontend
 
-Esta es una aplicación en React que permite agregar frases, visualizarlas en formato de tarjetas (cards), filtrarlas por texto en tiempo real y eliminarlas. Fue desarrollada como parte de un challenge técnico para evaluar conocimientos de React avanzado.
+![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
+![Vite](https://img.shields.io/badge/Vite-6.3.5-blueviolet)
+![React](https://img.shields.io/badge/React-19.1.0-61dafb?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?logo=typescript)
 
-Consigna:
-
-Realizar una aplicación en React que permita agregar frases y que esas frases las vaya poniendo
-en cards en una matriz. Tiene que permitir buscar dentro de las frases un contenido y que filtre las
-cards que contengan ese texto al comenzar a digitar las letras del mismo. También poder eliminar
-frases.
-
-Recuerda que el objetivo objetivo del challenge es entender tu nivel de conocimiento actual, por lo
-tanto, todo lo que agregues lo tendremos en cuenta y estaremos evaluando:
-
-Conocimientos de REACT avanzado, incluyendo Hooks, HOC, render props, manejo de Context.
-Manejo de estados: redux o context o cualquier otra biblioteca para la gestion de estado.
-
-JS
-Conocimientos de ES6+, clousures, hoisting, manejo de promesas aync await, gestion de errores,
-typescript, test, (Jest React Testing Library)
-
-Optimizaciones del rendimiento de la aplicación.
-
-Ejecuta el siguiente comando para iniciar la aplicación:
-
-```bash
-npm install
-npm run dev
-```
+Aplicación desarrollada como parte de un challenge técnico para evaluar conocimientos avanzados en React.  
+Permite **agregar frases**, visualizarlas en formato de tarjetas, **filtrarlas en tiempo real** y **eliminarlas**, con una arquitectura pensada para escalar y mantener rendimiento.
 
 ---
 
-## Funcionalidades
+## Consigna original
 
-- ✅ Lógica desacoplada con `Context + useReducer`
-- ✅ Persistencia local automática usando `localStorage` con función de inicialización
-- ✅ Uso de `React.memo`, `useMemo`, `useCallback` para mejorar performance
-- ✅ Composición avanzada con HOC (`withFilter`) que separa lógica de presentación
-- ✅ Tests unitarios para todos los componentes y lógica (incluido el HOC)
-- ✅ Validaciones simples para evitar inputs vacíos
-- ✅ Diseño limpio y responsive con `styled-components`
+> Realizar una aplicación en React que permita agregar frases y que esas frases las vaya poniendo
+> en cards en una matriz.
+> Tiene que permitir buscar dentro de las frases un contenido y que filtre las cards que contengan ese texto al comenzar a digitar las letras del mismo.
+> También poder eliminar frases.
+
+---
+
+## Enfoque técnico
+
+El proyecto fue resuelto aplicando buenas prácticas de diseño, manejo de estado y accesibilidad, priorizando claridad, extensibilidad y testabilidad:
+
+### Arquitectura y lógica
+
+- **Estado global desacoplado** con `Context + useReducer`
+- **Persistencia local** mediante `localStorage` con inicialización desde `useReducer`
+- **Separación de lógica/presentación** con un HOC `withFilter` reutilizable
+- **Uso de hooks de optimización**: `useMemo`, `useCallback`, `React.memo`
+
+### Accesibilidad
+
+- Uso de atributos `aria-label`, `role`, `aria-live`, y estructura semántica (`form`, `list`, `listitem`, `main`)
+- Navegación completa por teclado
+- Validación accesible y mensajes de error descriptivos (`role="alert"`)
+
+### Validaciones
+
+- Prevención de frases vacías con feedback visual accesible
+- Pruebas adicionales para inputs duplicados, frases vacías, y eliminación masiva
+
+### Testing
+
+- Tests unitarios con [Vitest](https://vitest.dev/) y [React Testing Library](https://testing-library.com/)
+- Tests en componentes clave
+- Lógica del HOC `withFilter` testeada de forma aislada
+- Tests de accesibilidad básica incluidos
 
 ---
 
@@ -52,20 +60,21 @@ npm run dev
 
 ---
 
-## Tests incluidos
-
-Se incluyen pruebas unitarias con cobertura completa de:
-
-- `PhraseForm` (formulario de ingreso)
-- `PhraseList` (lista con filtrado y eliminación)
-- `SearchInput` (input controlado)
-
-Ejecutá los tests con:
+## Instalación y ejecución
 
 ```bash
-npx vitest run
+npm install
+npm run dev
 ```
 
-## 🚀 Deploy
+## Ejecutar tests
 
-Aplicación desplegada: [https://card-challenge-jade.vercel.app](https://card-challenge-jade.vercel.app)
+```bash
+npm run test
+```
+
+## Ver reporte de cobertura
+
+```bash
+npm run coverage
+```

@@ -24,4 +24,9 @@ describe("SearchInput", () => {
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChange).toHaveBeenCalledWith("nuevo valor");
   });
+
+  test("tiene el aria-label correcto para accesibilidad", () => {
+    render(<SearchInput value="" onChange={() => {}} />);
+    expect(screen.getByLabelText(/buscar frases/i)).toBeInTheDocument();
+  });
 });

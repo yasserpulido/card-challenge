@@ -44,11 +44,16 @@ export const PhraseListView = ({ phrases }: Props) => {
   const { removePhrase } = usePhraseContext();
 
   return (
-    <Grid>
+    <Grid role="list" aria-label="Lista de frases agregadas">
       {phrases.map((p) => (
-        <Card key={p.id}>
+        <Card key={p.id} role="listitem" aria-label={`Frase: ${p.text}`}>
           {p.text}
-          <DeleteButton onClick={() => removePhrase(p.id)}>X</DeleteButton>
+          <DeleteButton
+            aria-label={`Eliminar frase: ${p.text}`}
+            onClick={() => removePhrase(p.id)}
+          >
+            X
+          </DeleteButton>
         </Card>
       ))}
     </Grid>

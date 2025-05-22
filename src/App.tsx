@@ -10,7 +10,7 @@ const AppContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #f0f2f5;
-  font-family: "Segoe UI", sans-serif;
+  font-family: inherit;
 `;
 
 const CardBox = styled.div`
@@ -29,6 +29,14 @@ const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
     box-sizing: border-box;
   }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    color: #000;
+  }
 `;
 
 function App() {
@@ -42,7 +50,7 @@ function App() {
   return (
     <AppContainer>
       <GlobalStyle />
-      <CardBox>
+      <CardBox role="main" aria-label="Aplicación de frases">
         <h1>Frases</h1>
         <PhraseForm />
         <SearchInput value={searchTerm} onChange={handleSearchChange} />
