@@ -43,14 +43,17 @@ const FieldWrapper = styled.div`
 export const PhraseForm = () => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
-  const { addPhrase } = usePhraseContext();
+  const { addPhrase, state } = usePhraseContext();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const trimmed = inputValue.trim();
 
-    if (trimmed.length === 0) {
-      setError("No se puede agregar una frase vacía");
+    if (
+      trimmed.length === 0 ||
+      state.phrases.some((p) => p.text.toLowerCase() === trimmed.toLowerCase())
+    ) {
+      setError("La frase ya existe o es vacía");
       return;
     }
 

@@ -67,8 +67,29 @@ describe("PhraseForm", () => {
     fireEvent.change(input, { target: { value: "   " } });
     fireEvent.submit(form);
 
-    expect(screen.getByRole("alert")).toHaveTextContent(
-      /no se puede agregar una frase vacía/i
+    expect(screen.getByRole("alert")).toHaveTextContent(/es vacía/i);
+  });
+
+  test("no permite agregar frases duplicadas", () => {
+    render(
+      <PhraseContext.Provider
+        value={{
+          state: { phrases: [{ id: "1", text: "Repetida" }] },
+          addPhrase: mockAddPhrase,
+          removePhrase: vi.fn(),
+        }}
+      >
+        <PhraseForm />
+      </PhraseContext.Provider>
     );
+
+    const input = screen.getByPlaceholderText(/escribe una frase/i);
+    const form = screen.getByRole("form");
+
+    fireEvent.change(input, { target: { value: "repetida" } });
+    fireEvent.submit(form);
+
+    expect(mockAddPhrase).not.toHaveBeenCalled();
+    expect(screen.getByRole("alert")).toHaveTextContent(/ya existe/i);
   });
 });
