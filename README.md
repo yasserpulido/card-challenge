@@ -78,3 +78,7 @@ npm run test
 ```bash
 npm run coverage
 ```
+
+## Vercel
+
+[Demo en Vercel](https://card-challenge-jade.vercel.app/)
